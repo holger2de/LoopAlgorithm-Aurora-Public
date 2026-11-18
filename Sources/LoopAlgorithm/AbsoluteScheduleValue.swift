@@ -1,0 +1,21 @@
+import Foundation
+
+public struct AbsoluteScheduleValue<T: Sendable>: TimelineValue, Sendable {
+    public var startDate: Date
+    public var endDate: Date
+    public var value: T
+
+    public init(startDate: Date, endDate: Date, value: T) {
+        self.startDate = startDate
+        self.endDate = endDate
+        self.value = value
+    }
+
+    public var duration: TimeInterval {
+        endDate.timeIntervalSince(startDate)
+    }
+}
+
+extension AbsoluteScheduleValue: Equatable where T: Equatable {}
+
+extension AbsoluteScheduleValue: Codable where T: Codable {}
